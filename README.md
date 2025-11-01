@@ -1,193 +1,167 @@
-# 🧩 ICE 3 — Software Development (Java)
+# 🚀 How to Upload the **Zoo** Code to the `zoo` Branch (Step‑by‑Step, Windows CMD)
 
-This repository contains the work for **ICE 3** in Software Development.  
-Two independent Java programs will be implemented in **separate branches**:
+Repository: **https://github.com/Sagaz0501/ICE3_Bakery_and_zoo.git**  
+Target branch: **`zoo`** (Alex’s branch)
 
-- **Bakery** — implemented by **Santiago Bernal** → branch: `bakery-santiago`
-- **Zoo** — implemented by **Alex Diamolidis** → branch: `zoo-alex`
-
-> Each student contributes their program to the same remote repository, following a clean branch workflow.
-
----
-
-## 📦 Repository Structure
-
-- **Branch `bakery-santiago`**  
-  Contains the Bakery program (Problem 0).  
-  Includes `.java` files and a **class diagram image**.
-
-- **Branch `zoo-alex`**  
-  Contains the Zoo program (Problem 1).  
-  Includes `.java` files and a **class diagram image**.
-
-> Per assignment, **only `.java` and image files** are to be submitted (no entire IDE projects).
+> This guide is written for a Windows machine using **Command Prompt (CMD)**.  
+> Follow **Option A** if you don’t have the repo locally yet (recommended).  
+> Follow **Option B** if you already have your project folder with code and want to connect it to GitHub.
 
 ---
+## Ignore this you already have it
 
-## 🔀 Git Workflow (Quick Start)
-
+## ✅ Prerequisites (do this once)
+1) Install **Git for Windows**: https://git-scm.com/download/win  
+2) Open **Command Prompt** (press `Win` → type `cmd` → Enter).  
+3) Configure your Git identity (only the first time):
 ```bash
-# clone your repo
-git clone https://github.com/<org-or-user>/<repo>.git
-cd <repo>
-
-# create and switch to your feature branch
-git switch -c bakery-santiago   # for Santiago
-# or
-git switch -c zoo-alex          # for Alex
-
-# add your files
-git add *.java images/*.png
-
-# commit
-git commit -m "Add ICE3 program and class diagram"
-
-# push and set upstream
-git push -u origin bakery-santiago   # or zoo-alex
+git config --global user.name "Alex Diamolidis"
+git config --global user.email "your-email@example.com"
 ```
+4) You’ll push over **HTTPS**. Have your **GitHub Personal Access Token** ready (used instead of password).  
+Create one here: https://github.com/settings/tokens (classic token with `repo` scope is enough).
 
 ---
 
-## 0) 🍞 Bakery (5 marks)
+## 🅰️ Option A — Start by CLONING the repository (recommended)
+> Use this if you **don’t** have the repo yet on your computer.
 
-**Scenario**  
-A popular bakery sometimes runs out of bread. A delivery girl sees a business opportunity: she waits at the bakery for fresh bread and delivers it to clients for a fee.
-
-**Requirements**
-- Identify classes and draw them in **Visual Paradigm** (include diagram image).
-- Add appropriate **instance variables** and **methods** to each class.
-- Program behavior:
-  - The **girl registers** a set of clients.
-  - The **bakery registers** the girl.
-  - The bakery **starts baking** bread at **random intervals (1–10 seconds)**  
-    *(hint: `Thread.sleep(random.nextInt(10000));`)*
-  - When a bread is ready, the **girl delivers** it to the **next customer**.
-  - The **customer acknowledges**, e.g.:  
-    `Donald received his bread.`
-
-**Suggested Class Set (example)**
-- `Bakery` (produces bread, notifies listener)
-- `DeliveryGirl` (listens for bread-ready events, delivers)
-- `Client` (acknowledges receipt)
-- `Bread` (simple value object / identifier)
-- `BreadReadyListener` (interface for event callback)
-- `BakeryApp` (main driver)
-
-**UML Diagram (place your image here)**
-```
-images/ice3-bakery-diagram.png
-```
-![Bakery Class Diagram](images/ice3-bakery-diagram.png)
-
-**Run (example)**
+1) In netbeans right click in the project and slect open in system.
+2) In the search bar delete the path and write cmd
+3) now you are in the proyect direcotry e.g
 ```bash
-javac *.java
-java BakeryApp
+cd %USERPROFILE%\Documents\System_devolpment\ICE3\zoo
 ```
 
----
-
-## 1) 🦁 Zoo (5 marks)
-
-**Scenario**  
-A zoo up north employs **zookeepers** who **bring their own animals**. The zoo itself does not connect directly with animals. In this example:
-- We have **2 zookeepers**, each with **3 animals**.
-- The program must output the formatted list of keepers and animals as specified.
-
-**Target Output (excerpt)**
-```
-Sheridan College Royal Metropolitan Zoo
-125 Park Avenue
-Brampton, ON
-M1M 1M1
-(905) 555-1234
-These are our 2 zookeepers and the animals they care for:
-Anand
-. Leo.    I am a 12 year old lion  and I love water buffalo.
-. Tony.   I am a  7 year old tiger and I love white tail deer.
-. Babu.   I am a 10 year old bear  and I love berries and honey.
-Bobby
-. Deepak. I am a  4 year old deer  and I love fresh grass.
-. Harry.  I am a  2 year old hare  and I love carrots.
-. Cowan.  I am a  9 year old cow   and I love crunchy corn.
-. ******* I am a ** year old ***** and I love *****************
-```
-
-Use:
-```java
-System.out.printf(". %-7s I am a %2d year old %-5s and I love %s.\n", name, age, species, diet);
-```
-
-**Design Guidance**
-- Use **ArrayList** for collections.
-- Identify instance variables and methods per the spec:
-
-```
-+--------------------+      +--------------------+      +--------------------+
-|        Zoo         | 1 1..5|      ZooKeeper     | 1 1..5|       Animal       |
-+--------------------+------ +--------------------+------ +--------------------+
-| name: String       |       | name: String       |       | name: String       |
-| keepers: ArrayList |       | animals: ArrayList |       | species: String    |
-|                    |       |                    |       | diet: String       |
-| Zoo()              |       | ZooKeeper()        |       | Animal()           |
-| addZooKeeper()     |       | addAnimal()        |       | about()            |
-| about()            |       | about()            |       |                    |
-+--------------------+       +--------------------+       +--------------------+
-```
-
-**Behavior**
-- Create animals (with species, diet, ages).
-- Create two zookeepers and assign three animals each.
-- Create a `Zoo` and **add zookeepers**.
-- Calling `zoo.about()` should **cascade**:
-  - `Zoo.about()` → each `ZooKeeper.about()` → each `Animal.about()`.
-- Output must match the formatting example.
-
-**UML Diagram (place your image here)**
-```
-images/ice3-zoo-diagram.png
-```
-![Zoo Class Diagram](images/ice3-zoo-diagram.png)
-
-**Run (example)**
+2) **Clone** the repository:
 ```bash
-javac *.java
-java TestZoo
+git clone https://github.com/Sagaz0501/ICE3_Bakery_and_zoo.git
 ```
 
+3) Enter the project folder:
+```bash
+cd ICE3_Bakery_and_zoo
+```
+
+4) Create or switch to the **zoo** branch (or switch if it already exists):
+```bash
+git checkout zoo
+```
+
+5) **Add the Diagram Class to the folder as a png image**
+
+6) Add the files to Git:
+```bash
+git add .
+```
+
+7) Commit your changes with a clear message:
+```bash
+git commit -m "Add Zoo program (.java) and class diagram"
+```
+
+8) Push the `zoo` branch to GitHub **and set upstream**:
+```bash
+git push -u origin zoo
+```
+> When asked for credentials: **Username = your GitHub username**, **Password = your PAT (token)**.
+
+Done ✅ Your code is now in the **zoo** branch on GitHub.
+
 ---
 
-## 3) ✅ Commit & Collaboration (5 marks)
+## 🅱️ Option B — You already have a local folder with your Zoo code
+> Use this if your files are already in a folder and you want to connect that folder to GitHub.
 
-- Pair with another student and create a **local** and **remote** repository.
-- Each student **adds one program** (Bakery or Zoo) to the **shared remote**.
-- Add the **instructor as collaborator** to the remote.
-- Submit:
-  - Your **`.java` files** and **diagram images** *(no entire projects)*.
-  - A **Git log file** (e.g., `git log --oneline --graph --decorate > gitlog.txt`).
+1) Open **Command Prompt** and go to your project folder (replace the path):
+```bash
+cd C:\Users\<YourUser>\Documents\MyZooProject
+```
+
+2) Initialize Git in this folder:
+```bash
+git init
+```
+
+3) Create (or switch to) the `zoo` branch:
+```bash
+git checkout zoo
+```
+
+4) Add the **remote** (link to GitHub repo):
+```bash
+git remote add origin https://github.com/Sagaz0501/ICE3_Bakery_and_zoo.git
+```
+
+5) Add all files and commit:
+```bash
+git add .
+git commit -m "Initial Zoo upload: .java files and diagram"
+```
+
+6) Push to GitHub and set upstream to `zoo`:
+```bash
+git push -u origin zoo
+```
+> Use your GitHub username + **Personal Access Token** when prompted.
+
+Done ✅ Your existing local project is now uploaded to the **zoo** branch.
 
 ---
 
-## 📝 Submission Checklist
-
-- [ ] `.java` files only (no IDE project folders)  
-- [ ] Class diagram images (`.png/.jpg`) from Visual Paradigm  
-- [ ] Branch pushed to GitHub (`bakery-santiago` or `zoo-alex`)  
-- [ ] Instructor added as collaborator  
-- [ ] `gitlog.txt` included (history of commits)  
+## 🔍 Verify on GitHub
+Open the repository page:  
+https://github.com/Sagaz0501/ICE3_Bakery_and_zoo  
+Then switch to the **zoo** branch using the branch dropdown and confirm your files are there.
 
 ---
 
-## 👥 Authors (Branches)
+## 🆘 Common Fixes
 
-- **Bakery** — *Santiago Bernal* → `bakery-santiago`  
-- **Zoo** — *Alex Diamolidis* → `zoo-alex`  
+- **“remote origin already exists”**  
+  You likely added the remote before. Reset it:
+  ```bash
+  git remote remove origin
+  git remote add origin https://github.com/Sagaz0501/ICE3_Bakery_and_zoo.git
+  ```
+
+- **“Updates were rejected” when pushing**  
+  Get the remote branch content first (if any) and then push:
+  ```bash
+  git fetch origin
+  git switch zoo        || git switch -c zoo
+  git pull --rebase origin zoo
+  git push -u origin zoo
+  ```
+
+- **Wrong branch**  
+  Check where you are:
+  ```bash
+  git branch
+  ```
+
+- **See your changes before committing**  
+  ```bash
+  git status
+  git diff
+  ```
 
 ---
 
-## 🛠️ Notes
+## 🧾 What to Upload (per assignment)
+- Only **`.java` files** and the **diagram image(s)** (e.g., `.png`).  
+- Do **not** upload the entire IDE project folder.
 
-- Keep your branch focused on **one program**.  
-- Use clear commit messages.  
-- Follow the exact output and formatting rules (especially for the Zoo output).  
-- Place diagram images in an `images/` folder and update the paths above if necessary.
+---
+
+## ✅ Quick Copy Paste (minimal commands)
+If you want the short version (Option A):
+```bash
+cd %USERPROFILE%\Documents
+git clone https://github.com/Sagaz0501/ICE3_Bakery_and_zoo.git
+cd ICE3_Bakery_and_zoo
+git switch -c zoo   ||   git switch zoo
+git add .
+git commit -m "Add Zoo program (.java) and class diagram"
+git push -u origin zoo
+```
