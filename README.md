@@ -117,6 +117,7 @@ girl.registerClient(new Client("Sarah"));
 
 bakery.registerGirl(girl);
 bakery.startBaking(5);
+```
 ## ⚙️ How It Works
 1. The **Bakery** bakes loaves at random time intervals (1–10 seconds).  
 2. Each time bread is ready, it triggers the `onBreadReady()` method in the **DeliveryGirl** class.  
