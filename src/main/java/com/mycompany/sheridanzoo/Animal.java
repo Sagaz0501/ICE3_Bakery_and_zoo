@@ -18,9 +18,10 @@ public class Animal {
         this.name = name;
         this.species = species;
         this.diet = diet;
+        this.age = age;
     }
 
     public void about(){
-        System.out.println(".  " + name + ": I am a " + age + "year old "+ species + " and I love " + diet);
+        System.out.println(".  " + name + ": I am a " + age + " years old "+ species + " and I love " + diet);
         }
     }
